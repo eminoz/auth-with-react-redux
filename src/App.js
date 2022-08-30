@@ -5,7 +5,7 @@ import NameComponent from "./NameComponent";
 function App() {
   const [sayi, setSayi] = useState(0);
   const [name, setName] = useState("emin");
-
+console.log("emin")
   useEffect(() => {
     console.log("ilk bu çalıştı");
   }, [sayi]);
