@@ -5,12 +5,11 @@ import { todoActions } from "../store/todo-slice";
 import CreateTodo from "./CreateTodo";
 
 function GetTodo() {
-
   let allTodos = useSelector((state) => state.todox.todo);
-  const dispatch =useDispatch()
+  const dispatch = useDispatch();
   const deleteTodo = (e) => {
     const bi = e.target.id;
-    dispatch(todoActions.deleteTodo(bi))
+    dispatch(todoActions.deleteTodo(bi));
   };
   return (
     <div>
@@ -20,9 +19,11 @@ function GetTodo() {
             <h1 className="text-grey-darkest text-xl">Todo List</h1>
           </div>
           <CreateTodo />
-
           {allTodos.map((e) => (
-            <div className=" flex-col   items-center justify-center flex mt-3 justify-around  ">
+            <div
+              key={e}
+              className=" flex-col   items-center justify-center flex mt-3 justify-around  "
+            >
               <div key={e} className="flex  mb-4 items-center">
                 <p
                   key={e}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { todoActions } from "../store/todo-slice";
 import "../index.css";
@@ -12,16 +12,18 @@ function CreateTodo() {
   const dispatch = useDispatch();
 
   const creatNewTodo = () => {
+    if (todo === "") {
+      alert("todo must not be empty");
+      return;
+    }
     dispatch(todoActions.createTodo({ name: todo }));
+    setTodo("");
   };
-  let user = useSelector((state) => state.todox.user);
-  console.log(user);
-  useEffect(() => {
-    dispatch(todoActions.getUser());
-  }, [dispatch]);
+
   return (
     <div className="h-100 justify-around w-full flex m-1 ">
       <Input
+        value={todo}
         onChange={handleName}
         className="border-inherit bg-red-50 rounded-md p-2"
       />
