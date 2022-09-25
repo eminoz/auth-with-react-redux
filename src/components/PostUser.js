@@ -6,8 +6,9 @@ function PostUser() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("user");
 
-  const creatUser = async ({ name, email, password }) => {
+  const creatUser = async ({ name, email, password, role }) => {
     const options = {
       url: `http://localhost:8090/api/user/create`,
       method: "POST",
@@ -54,7 +55,7 @@ function PostUser() {
         </label>
         <button
           onClick={() => {
-            creatUser({ name, email, password });
+            creatUser({ name, email, password, role });
           }}
         >
           Post

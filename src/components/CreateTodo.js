@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { todoActions } from "../store/todo-slice";
+import { useDispatch,  } from "react-redux";
+import { userActions } from "../store/user-slice";
 import "../index.css";
 import Input from "../UI/Input";
 function CreateTodo() {
@@ -16,7 +16,7 @@ function CreateTodo() {
       alert("todo must not be empty");
       return;
     }
-    dispatch(todoActions.createTodo({ name: todo }));
+    dispatch(userActions.createTodo({ name: todo }));
     setTodo("");
   };
 

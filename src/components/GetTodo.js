@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../index.css";
-import { todoActions } from "../store/todo-slice";
+import { userActions } from "../store/user-slice";
 import CreateTodo from "./CreateTodo";
 
 function GetTodo() {
@@ -9,7 +9,7 @@ function GetTodo() {
   const dispatch = useDispatch();
   const deleteTodo = (e) => {
     const bi = e.target.id;
-    dispatch(todoActions.deleteTodo(bi));
+    dispatch(userActions.deleteTodo(bi));
   };
   return (
     <div>

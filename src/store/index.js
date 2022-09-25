@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoActions from "./todo-slice";
+import todoActions from "./user-slice";
 
 const store = configureStore({
   reducer: { todox: todoActions.reducer },
