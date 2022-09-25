@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, } from "react-redux";
 import "../index.css";
-import { userActions } from "../store/user-slice";
+import { createUser, signin } from "../store/user-actions";
 function UserAuth() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -9,7 +9,14 @@ function UserAuth() {
   const [isSingedUp, setisSingedUp] = useState(false);
 
   const dispatch = useDispatch();
-
+  const create = () => {
+    const user = { name, email, password };
+    dispatch(createUser({ user }));
+  };
+  const signedin = () => {
+    const user = { email, password };
+    dispatch(signin({ user }));
+  };
   const afterSubmission = (event) => {
     event.preventDefault();
   };
@@ -50,7 +57,10 @@ function UserAuth() {
               name="password"
             />
 
-            <button className="bg-stone-400 mt-2 mb-2 rounded p-2">
+            <button
+              onClick={isSingedUp ? create : signedin}
+              className="bg-stone-400 mt-2 mb-2 rounded p-2"
+            >
               {isSingedUp ? <p>sign up</p> : <p>sign in </p>}
             </button>
 
