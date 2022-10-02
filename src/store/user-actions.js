@@ -26,11 +26,15 @@ export const createUser = ({ user }) => {
     };
     try {
       const res = await createNewUser(user);
-      if (res.status === 200) {
-        dispatch(userActions.createUser(res.data));
+      if (res.data.Success === false) {
+        alert(res.data.Message);
+        return;
       }
+      console.log(res.data.Data);
+
+      dispatch(userActions.createUser(res.data.Data));
     } catch (err) {
-      console.log(err.response.status);
+      console.log(err);
       if (err.response.status === 409) {
         console.log("already exist");
       }
@@ -63,15 +67,13 @@ export const signin = ({ user }) => {
       const res = await signin(user);
       if (res.data.Success === false) {
         alert(res.data.Message);
-      }
-      if (res.data.Success === false) {
         return;
       }
 
+      console.log(res.data);
       dispatch(userActions.singin(res.data.Data));
     } catch (err) {
       console.log(err.response.status);
-
     }
   };
 };

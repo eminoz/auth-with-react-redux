@@ -13,11 +13,15 @@ const userSlice = createSlice({
     fetchUserFromLocal(state) {
       var userFromlocal = localStorage.getItem("token");
       const localUser = JSON.parse(userFromlocal);
+
+      if (localUser === "undefined" || localUser === null) {
+        console.log("local is bos");
+        return;
+      }
       if (localUser) {
         state.token = localUser;
         state.isAuth = true;
       }
-      console.log("local is bos");
 
       return;
     },
@@ -27,12 +31,22 @@ const userSlice = createSlice({
         name: action.payload.name,
         email: action.payload.email,
       };
+
+      state.token = action.payload.token;
+      state.isAuth = true;
+
+      localStorage.setItem("token", JSON.stringify(action.payload.token));
     },
     singin(state, action) {
       state.token = action.payload.token;
       state.email = action.payload.email;
       state.role = action.payload.role;
-      state.isAuth=true
+      state.isAuth = true;
+    },
+    logout(state) {
+      localStorage.clear();
+      state.user = null;
+      state.isAuth = false;
     },
   },
 });
