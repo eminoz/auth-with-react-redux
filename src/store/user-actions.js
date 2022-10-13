@@ -10,6 +10,7 @@ export const createUser = ({ user }) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",
+          token: "",
         },
         mode: "cors",
 
@@ -30,7 +31,7 @@ export const createUser = ({ user }) => {
         alert(res.data.Message);
         return;
       }
-      console.log(res.data.Data);
+      console.log(res.data);
 
       dispatch(userActions.createUser(res.data.Data));
     } catch (err) {
@@ -41,7 +42,94 @@ export const createUser = ({ user }) => {
     }
   };
 };
+export const updateUserByEmail = ({ user }) => {
+  return async (dispatch) => {
+    var userFromlocal = localStorage.getItem("token");
+    var emailFromlocal = localStorage.getItem("email");
+    const localUserEmail = JSON.parse(emailFromlocal);
+    const localUserToken = JSON.parse(userFromlocal);
+    const updateUser = async (user) => {
+      const options = {
+        url: `http://localhost:3000/updateUser/${localUserEmail}`,
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+          token: localUserToken,
+        },
+        mode: "cors",
 
+        data: {
+          ID: user.id,
+          Name: user.name,
+          Email: user.email,
+        },
+      };
+
+      const responsedata = await axios(options);
+      return responsedata;
+    };
+    try {
+      const r = await updateUser(user);
+      if (user.email === "") {
+        return;
+      }
+
+      localStorage.setItem("email", JSON.stringify(user.email));
+      console.log(r);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const getUserByEmail = () => {
+  return async (dispatch) => {
+    const getUser = async (email) => {
+      var userFromlocal = localStorage.getItem("token");
+
+      const localUserToken = JSON.parse(userFromlocal);
+      const user = await axios.get(
+        `http://localhost:3000/getUserByEmail/${email}`,
+        {
+          headers: {
+            token: localUserToken,
+          },
+        }
+      );
+
+      return user.data;
+    };
+    try {
+      var emailFromlocal = localStorage.getItem("email");
+      const email = JSON.parse(emailFromlocal);
+
+      if (!email) {
+        return;
+      }
+      const user = await getUser(email);
+
+      const responseUser = user.Data;
+      dispatch(userActions.getUserByEmail(responseUser));
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+};
+export const fetchAllUser = () => {
+  return async (dispatch) => {
+    const fetchAll = async () => {
+      const res = await axios.get("http://localhost:3000/getAllUser");
+      return res.data.Data;
+    };
+    try {
+      const users = await fetchAll();
+
+      dispatch(userActions.fetchAllUser(users));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 export const signin = ({ user }) => {
   return async (dispatch) => {
     const signin = async (user) => {
@@ -70,7 +158,6 @@ export const signin = ({ user }) => {
         return;
       }
 
-      console.log(res.data);
       dispatch(userActions.singin(res.data.Data));
     } catch (err) {
       console.log(err.response.status);

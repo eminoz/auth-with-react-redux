@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, } from "react-redux";
+import { useDispatch } from "react-redux";
 import "../index.css";
 import { createUser, signin } from "../store/user-actions";
 function UserAuth() {
@@ -11,6 +11,9 @@ function UserAuth() {
   const dispatch = useDispatch();
   const create = () => {
     const user = { name, email, password };
+    if (name === "" && email === "" && password === "") {
+      alert(" bilgiler boş kalamaz");
+    }
     dispatch(createUser({ user }));
   };
   const signedin = () => {
