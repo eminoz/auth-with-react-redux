@@ -12,8 +12,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserByEmail());
-  });
-  
+  }, [dispatch]);
   useEffect(() => {
     dispatch(userActions.fetchUserFromLocal());
   }, [isAuh, dispatch]);

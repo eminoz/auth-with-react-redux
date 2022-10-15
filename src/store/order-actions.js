@@ -33,19 +33,11 @@ export const deleteOneOrder = ({ orders, productName, userId }) => {
     }
   };
 };
-export const getAllOrders = (id) => {
+export const incraceQuantity = (orders, productName, userId) => {
   return async (dispatch) => {
-    const getOrders = async (id) => {
-      const o = await axios.get(`http://localhost:3000/getUserOrders/${id}`);
-      return o.data;
-    };
-
-    try {
-      const orders = await getOrders(id);
-      console.log(orders.Data.Product);
-      dispatch(orderActions.getAllOrders(orders.Data.Product));
-    } catch (error) {
-      console.log(error);
-    }
+    console.log({ orders, productName, userId });
   };
+};
+export const decriceQuantity = () => {
+  return async (dispatch) => {};
 };

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { orderActions } from "./order-slice";
 import { userActions } from "./user-slice";
 
 export const createUser = ({ user }) => {
@@ -39,6 +40,40 @@ export const createUser = ({ user }) => {
       if (err.response.status === 409) {
         console.log("already exist");
       }
+    }
+  };
+};
+export const signin = ({ user }) => {
+  return async (dispatch) => {
+    const signin = async (user) => {
+      const options = {
+        url: "http://localhost:3000/signin",
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+        mode: "cors",
+
+        data: {
+          Email: user.email,
+          Password: user.password,
+        },
+      };
+      const responsedata = await axios(options);
+
+      return responsedata;
+    };
+    try {
+      const res = await signin(user);
+      if (res.data.Success === false) {
+        alert(res.data.Message);
+        return;
+      }
+
+      dispatch(userActions.singin(res.data.Data));
+    } catch (err) {
+      console.log(err.response.status);
     }
   };
 };
@@ -99,6 +134,11 @@ export const getUserByEmail = () => {
 
       return user.data;
     };
+    const getOrders = async (id) => {
+      const o = await axios.get(`http://localhost:3000/getUserOrders/${id}`);
+      return o.data;
+    };
+
     try {
       var emailFromlocal = localStorage.getItem("email");
       const email = JSON.parse(emailFromlocal);
@@ -107,8 +147,18 @@ export const getUserByEmail = () => {
         return;
       }
       const user = await getUser(email);
-
+      if (user.Success === false) {
+        alert(user.Message);
+        //if token has been expired app will log out
+        dispatch(userActions.logout());
+        return;
+      }
       const responseUser = user.Data;
+      console.log(responseUser);
+
+      const orders = await getOrders(responseUser.id);
+      console.log(orders.Data.Product);
+      dispatch(orderActions.getAllOrders(orders.Data.Product));
       dispatch(userActions.getUserByEmail(responseUser));
     } catch (err) {
       console.log(err.response);
@@ -127,40 +177,6 @@ export const fetchAllUser = () => {
       dispatch(userActions.fetchAllUser(users));
     } catch (error) {
       console.log(error);
-    }
-  };
-};
-export const signin = ({ user }) => {
-  return async (dispatch) => {
-    const signin = async (user) => {
-      const options = {
-        url: "http://localhost:3000/signin",
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-        mode: "cors",
-
-        data: {
-          Email: user.email,
-          Password: user.password,
-        },
-      };
-      const responsedata = await axios(options);
-
-      return responsedata;
-    };
-    try {
-      const res = await signin(user);
-      if (res.data.Success === false) {
-        alert(res.data.Message);
-        return;
-      }
-
-      dispatch(userActions.singin(res.data.Data));
-    } catch (err) {
-      console.log(err.response.status);
     }
   };
 };

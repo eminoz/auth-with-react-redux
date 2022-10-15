@@ -5,6 +5,7 @@ const userSlice = createSlice({
   initialState: {
     // 125: 40760909
     user: {},
+    id: "",
     allUser: [],
     email: null,
     isAuth: false,
@@ -50,6 +51,8 @@ const userSlice = createSlice({
       state.token = action.payload.token;
       state.email = action.payload.email;
       state.role = action.payload.role;
+      state.id = action.payload.id;
+      console.log(action.payload);
       state.user = {
         email: action.payload.email,
       };
