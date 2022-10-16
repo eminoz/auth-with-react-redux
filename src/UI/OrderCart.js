@@ -21,7 +21,7 @@ function OrderCart({ orders, userId }) {
 
   return (
     <>
-      <div className="flex  flex-col">
+      <div className="flex flex-wrap ">
         {orders.map((o) => (
           <div className=" m-1" key={o.productName}>
             <div className=" w-80 min-w-full  bg-slate-50 p-1 h-24 min-h-full rounded">

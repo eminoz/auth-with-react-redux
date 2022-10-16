@@ -18,7 +18,7 @@ function App() {
   }, [isAuh, dispatch]);
 
   return (
-    <div className="flex flex-col">{!isAuh ? <UserAuth /> : <Main />}</div>
+    <div className="flex  flex-col">{!isAuh ? <UserAuth /> : <Main />}</div>
   );
 }
 

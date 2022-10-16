@@ -154,7 +154,8 @@ export const getUserByEmail = () => {
         return;
       }
       const responseUser = user.Data;
-      console.log(responseUser);
+      console.log(responseUser)
+
 
       const orders = await getOrders(responseUser.id);
       console.log(orders.Data.Product);

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/user-slice";
 import { Link } from "react-router-dom";
-import { orderActions } from "../store/order-slice";
+
 function Header() {
   const dispatch = useDispatch();
   // let user = useSelector((state) => state.todox.user);
@@ -12,8 +12,6 @@ function Header() {
     dispatch(userActions.logout());
   };
 
-
- 
   return (
     <>
       <div className="flex m-2 justify-center">
