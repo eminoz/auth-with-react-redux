@@ -12,6 +12,21 @@ const orderSlice = createSlice({
       });
       console.log("total price" + state.totalPrice);
     },
+    addOrderToCart(state, actions) {
+      const newItem = actions.payload;
+
+      const existingOrder = state.orders.find(
+        (item) => item.productName === newItem.productName
+      );
+
+      if (!existingOrder) {
+        state.orders.push(newItem);
+        state.totalPrice = state.totalPrice + newItem.price;
+        return;
+      }
+      existingOrder.quantity++;
+      state.totalPrice = state.totalPrice + newItem.price;
+    },
     getAllOrders(state, actions) {
       state.orders = actions.payload;
       state.orders.forEach((e) => {

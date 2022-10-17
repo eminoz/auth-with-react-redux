@@ -1,7 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import "../index.css";
+import { orderActions } from "../store/order-slice";
 function ProductList({ prods }) {
-  console.log(prods);
+  const dispatch = useDispatch();
+  const addToCart = (e) => {
+    const currentProd = prods.filter(
+      (state) => state.productName === e.target.id
+    );
+    dispatch(orderActions.addOrderToCart(...currentProd));
+  };
   return (
     <>
       {prods &&
@@ -26,8 +34,9 @@ function ProductList({ prods }) {
                   {p.price}₺
                 </p>
                 <button
+                  id={p.productName}
                   className="bg-fuchsia-200	p-1 rounded"
-                  onClick={() => console.log("added")}
+                  onClick={addToCart}
                 >
                   add to card
                 </button>

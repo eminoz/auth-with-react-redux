@@ -12,7 +12,7 @@ function OrderList() {
 
   return (
     <>
-      <div className="flex m-2 justify-center">
+      <div className="flex m-1 justify-center">
         {orders ? <OrderCart userId={userId} orders={orders} />  : <p>Order boş</p>}
       </div>
       
