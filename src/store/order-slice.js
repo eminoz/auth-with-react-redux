@@ -35,7 +35,6 @@ const orderSlice = createSlice({
     },
     updateOrderByProductName(state, actions) {
       state.orders = actions.payload;
-      console.log(state.orders);
     },
     incraceQuantity(state, actions) {
       let a = actions.payload.productName;
@@ -50,6 +49,9 @@ const orderSlice = createSlice({
       let productName = actions.payload.productName;
       const filtered = state.orders.find((e) => e.productName === productName);
       if (filtered.quantity === 0) {
+        state.orders = state.orders.filter(
+          (e) => e.productName !== filtered.productName
+        );
         return;
       }
       state.totalPrice = state.totalPrice - filtered.price;

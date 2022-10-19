@@ -1,6 +1,7 @@
 import axios from "axios";
 import { orderActions } from "./order-slice";
 
+export const updateOrders = () => {};
 export const deleteOneOrder = ({ orders, productName, userId }) => {
   return async (dispatch) => {
     const updateOrder = async (orders, userId) => {
@@ -33,7 +34,8 @@ export const deleteOneOrder = ({ orders, productName, userId }) => {
     }
   };
 };
-export const createOrders = ({ orders, productName, userId }) => {
+
+export const createOrders = ({ orders, userId }) => {
   return async (dispatch) => {
     const createOrder = async () => {
       const options = {
@@ -47,9 +49,10 @@ export const createOrders = ({ orders, productName, userId }) => {
         mode: "cors",
 
         data: {
-          Product: [orders],
+          Product: orders,
         },
       };
+      console.log(options.data);
       const response = await axios(options);
       return response.data;
     };

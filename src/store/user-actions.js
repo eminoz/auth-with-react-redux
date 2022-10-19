@@ -154,15 +154,17 @@ export const getUserByEmail = () => {
         return;
       }
       const responseUser = user.Data;
-      console.log(responseUser)
-
 
       const orders = await getOrders(responseUser.id);
-      console.log(orders.Data.Product);
-      dispatch(orderActions.getAllOrders(orders.Data.Product));
+      if (orders.Data.Product === null) {
+        dispatch(orderActions.getAllOrders([]));
+      } else {
+        dispatch(orderActions.getAllOrders(orders.Data.Product));
+      }
+
       dispatch(userActions.getUserByEmail(responseUser));
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
     }
   };
 };
