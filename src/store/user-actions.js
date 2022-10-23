@@ -183,3 +183,25 @@ export const fetchAllUser = () => {
     }
   };
 };
+export const getUsersAddress = (email) => {
+  return async (dispatch) => {
+    const getAddress = async () => {
+      const user = await axios.get(`http://localhost:3000/getUserAddress/${email}`, {
+        headers: {
+          token: "localUserToken",
+        },
+      });
+      return user.data;
+    };
+    try {
+      const response = await getAddress(email);
+
+
+        
+
+      dispatch(userActions.fetchUserAddress(response.Data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

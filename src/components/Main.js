@@ -1,5 +1,5 @@
 import React from "react";
-import Profile from "../components/Profile";
+import Profile from "./Profile/Profile";
 import "../index.css";
 import Header from "./Header";
 import OrderList from "./OrderList";
@@ -14,7 +14,7 @@ function Main() {
       <Header />
       <Routes>
         <Route path="/" element={<Products />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile/*" element={<Profile />} />
         <Route path="orders" element={<OrderList />} />
       </Routes>
     </BrowserRouter>

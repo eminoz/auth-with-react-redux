@@ -11,11 +11,16 @@ const userSlice = createSlice({
     isAuth: false,
     token: null,
     role: null,
+    address: {},
   },
   reducers: {
     fetchAllUser(state, action) {
       const users = action.payload;
       state.allUser = users;
+    },
+    fetchUserAddress(state, action) {
+      state.address = action.payload;
+
     },
     fetchUserFromLocal(state) {
       var userFromlocal = localStorage.getItem("token");
