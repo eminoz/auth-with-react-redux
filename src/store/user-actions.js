@@ -1,4 +1,5 @@
 import axios from "axios";
+import { alertActions } from "./alert-slice";
 import { orderActions } from "./order-slice";
 import { userActions } from "./user-slice";
 
@@ -79,6 +80,11 @@ export const signin = ({ user }) => {
 };
 export const updateUserByEmail = ({ user }) => {
   return async (dispatch) => {
+    dispatch(alertActions.toggle());
+    setTimeout(() => {
+      dispatch(alertActions.toggle());
+    }, 5000);
+
     var userFromlocal = localStorage.getItem("token");
     var emailFromlocal = localStorage.getItem("email");
     const localUserEmail = JSON.parse(emailFromlocal);
@@ -100,17 +106,35 @@ export const updateUserByEmail = ({ user }) => {
           Email: user.email,
         },
       };
-
+      dispatch(
+        alertActions.showNotification({
+          msg: "user updating",
+          alertType: "info",
+        })
+      );
       const responsedata = await axios(options);
       return responsedata;
     };
     try {
       const r = await updateUser(user);
       if (user.email === "") {
+        dispatch(
+          alertActions.showNotification({
+            msg: "user should not be empty",
+            alertType: "danger",
+          })
+        );
         return;
       }
 
       localStorage.setItem("email", JSON.stringify(user.email));
+      dispatch(
+        alertActions.showNotification({
+          msg: "user updated",
+          alertType: "success",
+        })
+      );
+
       console.log(r);
     } catch (error) {
       console.log(error);
@@ -186,18 +210,18 @@ export const fetchAllUser = () => {
 export const getUsersAddress = (email) => {
   return async (dispatch) => {
     const getAddress = async () => {
-      const user = await axios.get(`http://localhost:3000/getUserAddress/${email}`, {
-        headers: {
-          token: "localUserToken",
-        },
-      });
+      const user = await axios.get(
+        `http://localhost:3000/getUserAddress/${email}`,
+        {
+          headers: {
+            token: "localUserToken",
+          },
+        }
+      );
       return user.data;
     };
     try {
       const response = await getAddress(email);
-
-
-        
 
       dispatch(userActions.fetchUserAddress(response.Data));
     } catch (error) {
