@@ -3,6 +3,33 @@ import { alertActions } from "./alert-slice";
 import { orderActions } from "./order-slice";
 import { userActions } from "./user-slice";
 
+export const updateOrders = ({ email, address }) => {
+  return async (dispatch) => {
+    const updateAddress = async ({ email, address }) => {
+      const options = {
+        url: `http://localhost:3000/createAddress/${email}`,
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+          token: "",
+        },
+        mode: "cors",
+
+        data: address,
+      };
+      console.log(address);
+      const response = await axios(options);
+      return response;
+    };
+    try {
+      const res = await updateAddress({ email, address });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 export const createUser = ({ user }) => {
   return async (dispatch) => {
     const createNewUser = async (user) => {

@@ -53,12 +53,14 @@ const userSlice = createSlice({
       localStorage.setItem("email", JSON.stringify(action.payload.email));
     },
     singin(state, action) {
+      console.log(action.payload.email)
       state.token = action.payload.token;
       state.email = action.payload.email;
       state.role = action.payload.role;
       state.id = action.payload.id;
-      console.log(action.payload);
       state.user = {
+        id: action.payload.id,
+        name: action.payload.name,
         email: action.payload.email,
       };
       state.isAuth = true;

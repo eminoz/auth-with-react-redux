@@ -6,21 +6,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function ProfileInformations({ user }) {
   const address = useSelector((s) => s.todox.address);
-  console.log(address);
-  console.log(user);
   const dispatch = useDispatch();
   const loc = useLocation();
   let navigate = useNavigate();
 
-  console.log(loc.pathname);
-
   const updateUserInformaition = (e) => {
-    console.log(e.target.id);
-    navigate(loc.pathname+"/" + e.target.id);
+    navigate(loc.pathname + "/" + e.target.id);
   };
   const updateUserAddress = (e) => {
-    console.log(e.target.id);
-    navigate(loc.pathname+"/" + e.target.id);
+    navigate(loc.pathname + "/" + e.target.id);
   };
   useEffect(() => {
     dispatch(getUsersAddress(user.email));
@@ -54,14 +48,20 @@ function ProfileInformations({ user }) {
             <div className="m-1">
               <p className="text-lg">Address</p>
             </div>
-            <div className="bg-slate-200 m-1 p-1">
-              <p className="text-lg font-bold p-1">İl</p>
-              <p>{address.il} </p>
-              <p className="text-lg font-bold p-1">İlçe </p>
-              <p>{address.ilce} </p>
-              <p className="text-lg font-bold p-1 ">Full adress</p>
-              <p>{address.fullAddress} </p>
-            </div>
+            {address.il === "" ? (
+              <div className="bg-slate-200 p-1 m-1 rounded">
+                <p>adres eklenmemiş lütfen adres ekleyiniz </p>
+              </div>
+            ) : (
+              <div className="bg-slate-200 m-1 p-1">
+                <p className="text-lg font-bold p-1">İl</p>
+                <p>{address.il} </p>
+                <p className="text-lg font-bold p-1">İlçe </p>
+                <p>{address.ilce} </p>
+                <p className="text-lg font-bold p-1 ">Full adress</p>
+                <p>{address.fullAddress} </p>
+              </div>
+            )}
             <div className="flex justify-center">
               <button
                 id="setAddress"

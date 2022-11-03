@@ -1,7 +1,7 @@
 import axios from "axios";
 import { orderActions } from "./order-slice";
 
-export const updateOrders = () => {};
+
 export const deleteOneOrder = ({ orders, productName, userId }) => {
   return async (dispatch) => {
     const updateOrder = async (orders, userId) => {
