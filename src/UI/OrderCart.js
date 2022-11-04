@@ -24,37 +24,37 @@ function OrderCart({ orders, userId }) {
   return (
     <>
       <div className="flex flex-col ">
-        <div className="flex justify-center flex-wrap ">
+        <div className="flex justify-center flex-col ">
           {orders.map((o) => (
             <div className=" m-1" key={o.productName}>
-              <div className=" w-80 min-w-full mr-1 ml-2 bg-slate-50 p-1 h-24 min-h-full rounded">
+              <div className=" w-90 min-w-full mr-1 ml-2 bg-slate-50 p-1 h-24 min-h-full rounded">
                 <div className="flex flex-col justify-between">
                   <div className="flex justify-center">
                     <div>resim</div>
                   </div>
                   <div className="flex  justify-between">
-                    <div className="p-1 bg-stone-300	rounded">
-                      <p className="font-bold	"> Product Name</p>
-                      <div>{o.productName}</div>
+                    <div className="flex flex-col  items-center p-1 bg-stone-300	rounded">
+                      <p className="font-bold	text-rose-900"> Product Name</p>
+                      <div className="font-bold">{o.productName}</div>
                     </div>
-                    <div className="p-1 bg-stone-300 rounded	">
-                      <p className="font-bold	">Price</p>
-                      <div>{o.price}</div>
+                    <div className="flex flex-col items-center   p-1 bg-stone-300 rounded	">
+                      <p className="font-bold text-rose-900	">Price</p>
+                      <div className="font-bold" >{o.price+"₺"}</div>
                     </div>
                     <div className="flex items-center">
                       <div className=" flex flex-col p-1 bg-stone-300	rounded">
                         <div>
-                          <p className="font-bold	">Quantity</p>
+                          <p className="font-bold text-rose-900	">Quantity</p>
                         </div>
                         <div className="flex flex-row justify-between">
                           <button
-                            className="bg-red-200 p-1"
+                            className="bg-red-200 p-1 "
                             id={o.productName}
                             onClick={incrace}
                           >
                             +
                           </button>
-                          <div>{o.quantity}</div>
+                          <div className="font-bold">{o.quantity}</div>
                           <button
                             className="bg-red-200 p-1"
                             id={o.productName}
@@ -66,7 +66,7 @@ function OrderCart({ orders, userId }) {
                       </div>
                       <div>
                         <button
-                          className="bg-red-200 flex m-1 items-center	rounded p-1"
+                          className="bg-red-200 flex m-2 items-center	rounded p-1"
                           id={o.productName}
                           onClick={updateOrder}
                         >

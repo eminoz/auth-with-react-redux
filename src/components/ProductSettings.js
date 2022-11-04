@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { createNewProduct } from "../store/product-actions";
 function ProductSettings() {
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDecription] = useState("");
   const [quantity, setQuantity] = useState("");
-const update=()=>{
-  const newProduct={productName,price,description,quantity}
-  console.log(newProduct)
-}
+  const dispatch = useDispatch();
+  const update = () => {
+    const newProduct = {
+      ProductName: productName,
+      Price: Number(price),
+      Description: description,
+      Quantity: Number(quantity),
+    };
+    dispatch(createNewProduct({ newProduct }));
+  };
   return (
     <>
       <div className="flex m-2 justify-center">
@@ -61,10 +68,10 @@ const update=()=>{
               name="quantiy"
             />
           </div>
-            <button className="bg-violet-300 p-1 rounded m-1" onClick={update}>
-              Add product
-            </button>
-          </div>
+          <button className="bg-violet-300 p-1 rounded m-1" onClick={update}>
+            Add product
+          </button>
+        </div>
       </div>
     </>
   );
