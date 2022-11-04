@@ -12,9 +12,6 @@ function SetUserInformations() {
   const alertIsVisible = useSelector((state) => state.alertx.alertIsVisible);
   const notification = useSelector((state) => state.alertx.notification);
 
-
-
-
   const update = (event) => {
     event.preventDefault();
 

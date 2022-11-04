@@ -17,22 +17,23 @@ function ProfileInformations({ user }) {
     navigate(loc.pathname + "/" + e.target.id);
   };
   useEffect(() => {
+    console.log(user.email)
     dispatch(getUsersAddress(user.email));
   }, [user, dispatch]);
   return (
     <>
       {user && (
         <div className="w-96">
-          <div className="m-1 ">personel Informations</div>
+          <div className="m-1 ">User Informations</div>
           <div>
-            <div className="bg-slate-200 m-1 p-1">
+            <div className=" flex items-center bg-slate-200 m-1 p-1">
               <p className="text-lg font-bold">user name</p>
-              <p>{user.name} </p>
+              <p className="ml-1">{user.name} </p>
             </div>
 
-            <div className="bg-slate-200 m-1 p-1">
-              <p className="text-lg font-bold">user email</p>
-              <p>{user.email} </p>
+            <div className=" flex  items-center bg-slate-200 m-1 p-1">
+              <p className="text-lg font-bold">user email:</p>
+              <p className="ml-1">{  user.email} </p>
             </div>
             <div className="flex justify-center">
               <button
@@ -54,12 +55,18 @@ function ProfileInformations({ user }) {
               </div>
             ) : (
               <div className="bg-slate-200 m-1 p-1">
-                <p className="text-lg font-bold p-1">İl</p>
-                <p>{address.il} </p>
-                <p className="text-lg font-bold p-1">İlçe </p>
-                <p>{address.ilce} </p>
-                <p className="text-lg font-bold p-1 ">Full adress</p>
-                <p>{address.fullAddress} </p>
+                <div className="flex items-center ">
+                  <p className="text-lg font-bold p-1">İl:</p>
+                  <p>{address.il} </p>
+                </div>
+                <div className="flex items-center">
+                  <p className="text-lg font-bold p-1">İlçe: </p>
+                  <p>{address.ilce} </p>
+                </div>
+                <div className="flex items-center">
+                  <p className="text-lg font-bold p-1 ">Full adress: </p>
+                  <p>{address.fullAddress} </p>
+                </div>
               </div>
             )}
             <div className="flex justify-center">

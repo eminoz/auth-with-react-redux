@@ -20,7 +20,6 @@ const userSlice = createSlice({
     },
     fetchUserAddress(state, action) {
       state.address = action.payload;
-
     },
     fetchUserFromLocal(state) {
       var userFromlocal = localStorage.getItem("token");
@@ -53,15 +52,13 @@ const userSlice = createSlice({
       localStorage.setItem("email", JSON.stringify(action.payload.email));
     },
     singin(state, action) {
-      console.log(action.payload.email)
+      console.log(action.payload.email);
       state.token = action.payload.token;
-      state.email = action.payload.email;
-      state.role = action.payload.role;
-      state.id = action.payload.id;
       state.user = {
         id: action.payload.id,
         name: action.payload.name,
         email: action.payload.email,
+        role: action.payload.role,
       };
       state.isAuth = true;
 
@@ -74,11 +71,14 @@ const userSlice = createSlice({
       state.isAuth = false;
     },
     getUserByEmail(state, action) {
+      console.log(action.payload);
       state.user = {
         id: action.payload.id,
         name: action.payload.name,
         email: action.payload.email,
+        role: action.payload.role,
       };
+      console.log(state.user);
     },
   },
 });

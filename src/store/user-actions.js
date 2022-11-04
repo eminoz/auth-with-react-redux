@@ -18,7 +18,6 @@ export const updateOrders = ({ email, address }) => {
 
         data: address,
       };
-      console.log(address);
       const response = await axios(options);
       return response;
     };
@@ -60,7 +59,6 @@ export const createUser = ({ user }) => {
         alert(res.data.Message);
         return;
       }
-      console.log(res.data);
 
       dispatch(userActions.createUser(res.data.Data));
     } catch (err) {
@@ -182,7 +180,6 @@ export const getUserByEmail = () => {
           },
         }
       );
-
       return user.data;
     };
     const getOrders = async (id) => {
@@ -193,11 +190,11 @@ export const getUserByEmail = () => {
     try {
       var emailFromlocal = localStorage.getItem("email");
       const email = JSON.parse(emailFromlocal);
-
       if (!email) {
         return;
       }
       const user = await getUser(email);
+
       if (user.Success === false) {
         alert(user.Message);
         //if token has been expired app will log out
@@ -207,12 +204,13 @@ export const getUserByEmail = () => {
       const responseUser = user.Data;
 
       const orders = await getOrders(responseUser.id);
+
       if (orders.Data.Product === null) {
         dispatch(orderActions.getAllOrders([]));
       } else {
         dispatch(orderActions.getAllOrders(orders.Data.Product));
       }
-
+   
       dispatch(userActions.getUserByEmail(responseUser));
     } catch (err) {
       console.log(err);

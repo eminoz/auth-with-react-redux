@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 function Header() {
   const dispatch = useDispatch();
-  // let user = useSelector((state) => state.todox.user);
-  // console.log(user);
+  let user = useSelector((state) => state.todox.user);
+  console.log(user.role);
   const totalPrice = useSelector((state) => state.orderx.totalPrice);
   const logoutUser = () => {
     dispatch(userActions.logout());
@@ -21,21 +21,30 @@ function Header() {
               <Link to="/">Main</Link>
             </nav>
           </div>
+          {user.role === "admin" ? (
+            <div className="bg-fuchsia-200 rounded p-2 m-1">
+              <nav>
+                <Link to="/productSettings">Product Settings</Link>
+              </nav>
+            </div>
+          ) : null}
           <div className="bg-fuchsia-200 rounded p-2 m-1">
             <nav>
-              <Link to="/profile">profile</Link>
+
+              <Link to="/orders">Orders</Link>
             </nav>
           </div>
-          <div className="bg-fuchsia-200 rounded p-2 m-1">
-            <nav>
-              <Link to="/orders">orders</Link>
-            </nav>
-          </div>
+        
           <div className="bg-pink-200 p-2 rounded m-1">
             total price {totalPrice}$
           </div>
+          <div className="bg-fuchsia-200 rounded p-2 m-1">
+            <nav>
+              <Link to="/profile">Profile</Link>
+            </nav>
+          </div>
           <button className="bg-red-300 rounded p-2 m-1" onClick={logoutUser}>
-            logout
+            Logout
           </button>
         </div>
       </div>
