@@ -8,6 +8,7 @@ const productSlice = createSlice({
     getProducts(state, action) {
       state.products = action.payload;
     },
+
   },
 });
 export const productActions = productSlice.actions;

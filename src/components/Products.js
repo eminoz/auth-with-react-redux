@@ -14,7 +14,7 @@ function Products() {
   return (
     <>
       <div className="flex  justify-center">
-        <ProductList prods={prods.Data} />
+        <ProductList prods={prods} />
       </div>
     </>
   );

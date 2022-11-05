@@ -22,7 +22,7 @@ function Main() {
       <Routes>
         <Route path="/" element={<Products />} />
         <Route path="profile/*" element={<Profile />} />
-        <Route path="productSettings" element={<ProductSettings />} />
+        <Route path="productSettings/*" element={<ProductSettings />} />
         <Route path="orders" element={<OrderList />} />
       </Routes>
     </BrowserRouter>

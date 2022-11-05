@@ -10,14 +10,10 @@ function ProfileInformations({ user }) {
   const loc = useLocation();
   let navigate = useNavigate();
 
-  const updateUserInformaition = (e) => {
+  const navigateUser = (e) => {
     navigate(loc.pathname + "/" + e.target.id);
-  };
-  const updateUserAddress = (e) => {
-    navigate(loc.pathname + "/" + e.target.id);
-  };
+  }
   useEffect(() => {
-    console.log(user.email)
     dispatch(getUsersAddress(user.email));
   }, [user, dispatch]);
   return (
@@ -38,7 +34,7 @@ function ProfileInformations({ user }) {
             <div className="flex justify-center">
               <button
                 id="setUserInformations"
-                onClick={updateUserInformaition}
+                onClick={navigateUser}
                 className="bg-fuchsia-200 m-1 p-1 rounded "
               >
                 update user
@@ -72,7 +68,7 @@ function ProfileInformations({ user }) {
             <div className="flex justify-center">
               <button
                 id="setAddress"
-                onClick={updateUserAddress}
+                onClick={navigateUser}
                 className="bg-fuchsia-200 m-1 p-1 rounded "
               >
                 add or update order

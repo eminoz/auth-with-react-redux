@@ -12,7 +12,6 @@ function OrderCart({ orders, userId }) {
   };
   const decrice = (e) => {
     dispatch(orderActions.decriceQuantity({ productName: e.target.id }));
-    console.log(e.target.id);
   };
   const updateOrder = (e) => {
     dispatch(deleteOneOrder({ orders, productName: e.target.id, userId }));
