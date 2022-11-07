@@ -8,7 +8,14 @@ function ProductList({ prods }) {
     const currentProd = prods.filter(
       (state) => state.productName === e.target.id
     );
-    dispatch(orderActions.addOrderToCart(...currentProd));
+    const {...a}=currentProd
+    const products={
+      productName:a[0].productName,
+      description:a[0].description,
+      price:a[0].price,
+      quantity:1
+    }
+    dispatch(orderActions.addOrderToCart(products));
   };
   return (
     <>

@@ -1,9 +1,10 @@
 import axios from "axios";
 import { orderActions } from "./order-slice";
-
+import { alertActions } from "./alert-slice";
 
 export const deleteOneOrder = ({ orders, productName, userId }) => {
   return async (dispatch) => {
+
     const updateOrder = async (orders, userId) => {
       const options = {
         url: `http://localhost:3000/createOrder/${userId}`,
@@ -37,6 +38,16 @@ export const deleteOneOrder = ({ orders, productName, userId }) => {
 
 export const createOrders = ({ orders, userId }) => {
   return async (dispatch) => {
+    dispatch(alertActions.toggle());
+    setTimeout(() => {
+      dispatch(alertActions.toggle());
+    }, 4000);
+    dispatch(
+      alertActions.showNotification({
+        msg: "order updating",
+        alertType: "info",
+      })
+    );
     const createOrder = async () => {
       const options = {
         url: `http://localhost:3000/createOrder/${userId}`,
@@ -52,12 +63,19 @@ export const createOrders = ({ orders, userId }) => {
           Product: orders,
         },
       };
-      console.log(options.data);
       const response = await axios(options);
       return response.data;
     };
     try {
       const product = await createOrder(orders, userId);
+      if (product.Success === true) {
+        dispatch(
+          alertActions.showNotification({
+            msg: "order updated",
+            alertType: "success",
+          })
+        );
+      }
       console.log(product);
     } catch (error) {
       console.log(error);

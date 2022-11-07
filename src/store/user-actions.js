@@ -108,7 +108,7 @@ export const updateUserByEmail = ({ user }) => {
     dispatch(alertActions.toggle());
     setTimeout(() => {
       dispatch(alertActions.toggle());
-    }, 5000);
+    }, 4000);
 
     var userFromlocal = localStorage.getItem("token");
     var emailFromlocal = localStorage.getItem("email");
@@ -142,10 +142,11 @@ export const updateUserByEmail = ({ user }) => {
     };
     try {
       const r = await updateUser(user);
-      if (user.email === "") {
+      console.log(r);
+      if (r.data.Success === false) {
         dispatch(
           alertActions.showNotification({
-            msg: "user should not be empty",
+            msg: r.data.Message,
             alertType: "danger",
           })
         );
@@ -159,8 +160,6 @@ export const updateUserByEmail = ({ user }) => {
           alertType: "success",
         })
       );
-
-      console.log(r);
     } catch (error) {
       console.log(error);
     }
@@ -210,7 +209,7 @@ export const getUserByEmail = () => {
       } else {
         dispatch(orderActions.getAllOrders(orders.Data.Product));
       }
-   
+
       dispatch(userActions.getUserByEmail(responseUser));
     } catch (err) {
       console.log(err);

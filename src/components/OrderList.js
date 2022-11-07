@@ -8,7 +8,6 @@ function OrderList() {
   let user = useSelector((state) => state.todox.user);
 
   let userId = user.id;
-  console.log(orders);
   return (
     <>
       <div className="flex m-1 justify-center">

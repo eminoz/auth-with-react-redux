@@ -60,13 +60,13 @@ function ProductSettings() {
               ))}
           </div>
 
-          <button
+          {/* <button
             id="updateProduct"
             onClick={routeProduct}
             className="bg-blue-100 p-1 m-1 rounded"
           >
             update product
-          </button>
+          </button> */}
         </div>
       </div>
     </>

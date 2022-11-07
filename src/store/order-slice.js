@@ -47,7 +47,19 @@ const orderSlice = createSlice({
     },
     decriceQuantity(state, actions) {
       let productName = actions.payload.productName;
+      let deleteAll = actions.payload.deleteAll;
+
       const filtered = state.orders.find((e) => e.productName === productName);
+      if (deleteAll) {
+        state.orders = state.orders.filter(
+          (e) => e.productName !== filtered.productName
+        );
+
+        state.totalPrice =
+          state.totalPrice - filtered.quantity * filtered.price;
+
+        return;
+      }
       if (filtered.quantity === 0) {
         state.orders = state.orders.filter(
           (e) => e.productName !== filtered.productName

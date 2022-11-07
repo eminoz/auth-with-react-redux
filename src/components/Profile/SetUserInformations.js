@@ -4,14 +4,14 @@ import { updateUserByEmail } from "../../store/user-actions";
 import Alerts from "../../UI/Alerts";
 
 function SetUserInformations() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
 
   let user = useSelector((state) => state.todox.user);
   const dispatch = useDispatch();
   const alertIsVisible = useSelector((state) => state.alertx.alertIsVisible);
   const notification = useSelector((state) => state.alertx.notification);
 
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
   const update = (event) => {
     event.preventDefault();
 
@@ -30,8 +30,9 @@ function SetUserInformations() {
             onChange={(e) => {
               setName(e.target.value);
             }}
-            placeholder={`name: ${user.name}`}
+            placeholder={`name: ${name}`}
             type="text"
+            value={name}
             name="firstName"
           />
           <input
@@ -39,8 +40,9 @@ function SetUserInformations() {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            placeholder={`name: ${user.email}`}
+            placeholder={`name: ${email}`}
             type="text"
+            value={email}
             name="email"
           />
           <button className="bg-violet-300 p-1 rounded m-1" onClick={update}>

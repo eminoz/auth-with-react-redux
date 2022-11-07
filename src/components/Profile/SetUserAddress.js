@@ -4,10 +4,11 @@ import { updateOrders } from "../../store/user-actions";
 function SetUserAddress() {
   const address = useSelector((s) => s.todox.address);
   const email = useSelector((s) => s.todox.user.email);
+  console.log(address)
   const dispatch = useDispatch();
-  const [il, setIl] = useState("");
-  const [ilce, setIlce] = useState("");
-  const [fullAddress, setFullAdress] = useState("");
+  const [il, setIl] = useState(address.il);
+  const [ilce, setIlce] = useState(address.ilce);
+  const [fullAddress, setFullAdress] = useState(address.fullAddress);
   const update = (event) => {
     event.preventDefault();
     const address = { il, ilce, fullAddress };
@@ -27,6 +28,7 @@ function SetUserAddress() {
               placeholder={`${address.il}`}
               type="text"
               name="il"
+              value={il}
             />
           </div>
           <div className="flex items-center justify-between">
@@ -39,6 +41,7 @@ function SetUserAddress() {
               placeholder={` ${address.ilce}`}
               type="text"
               name="ilce"
+              value={ilce}
             />
           </div>
           <div className="flex items-center justify-between">
@@ -50,6 +53,7 @@ function SetUserAddress() {
               }}
               placeholder={` ${address.fullAddress}`}
               type="text"
+              value={fullAddress}
               name="il"
             />
           </div>

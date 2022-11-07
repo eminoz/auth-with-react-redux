@@ -71,14 +71,12 @@ const userSlice = createSlice({
       state.isAuth = false;
     },
     getUserByEmail(state, action) {
-      console.log(action.payload);
       state.user = {
         id: action.payload.id,
         name: action.payload.name,
         email: action.payload.email,
         role: action.payload.role,
       };
-      console.log(state.user);
     },
   },
 });

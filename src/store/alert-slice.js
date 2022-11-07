@@ -9,6 +9,7 @@ const alertSlice = createSlice({
     toggle(state) {
       state.alertIsVisible = !state.alertIsVisible;
 
+
     },
     showNotification(state, action) {
       state.notification = {
