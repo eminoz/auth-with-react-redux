@@ -1,7 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { deleteProduct, getAllProduct } from "../store/product-actions";
 import AddProduct from "./AddProduct";
 import UpdateProduct from "./UpdateProduct";
 
@@ -9,12 +10,21 @@ function ProductSettings() {
   const loc = useLocation();
   let navigate = useNavigate();
   const prods = useSelector((s) => s.productx.products);
+
+  const dispatch = useDispatch();
+  const deleteTheProduct = (e) => {
+
+    dispatch(deleteProduct({ productName: e.target.name }));
+  };
   const updateTheProduct = (e) => {
     navigate(loc.pathname + "/" + e.target.id + `/${e.target.name}`);
   };
   const routeProduct = (e) => {
     navigate(loc.pathname + "/" + e.target.id);
   };
+  useEffect(() => {
+    dispatch(getAllProduct());
+  }, [prods,dispatch]);
 
   return (
     <>
@@ -42,31 +52,35 @@ function ProductSettings() {
                         <p className="	">{p.description}</p>
                       </div>
                     </div>
-                    <div className="flex m-3  justify-between">
-                      <p className="text-2xl text-amber-600	 font-bold">
-                        {p.price}₺
-                      </p>
-                      <button
-                        id="updateProduct"
-                        name={p.productName}
-                        className="bg-fuchsia-200	p-1 rounded"
-                        onClick={updateTheProduct}
-                      >
-                        Update Product
-                      </button>
+                    <div className="flex flex-col ">
+                      <div className="flex justify-center">
+                        <p className="text-2xl text-amber-600	 font-bold">
+                          {p.price}₺
+                        </p>
+                      </div>
+                      <div className="flex justify-center">
+                        <button
+                          id="updateProduct"
+                          name={p.productName}
+                          className="bg-red-400	m-1	p-1 rounded"
+                          onClick={deleteTheProduct}
+                        >
+                          delete
+                        </button>
+                        <button
+                          id="updateProduct"
+                          name={p.productName}
+                          className="bg-fuchsia-400 m-1	p-1 rounded"
+                          onClick={updateTheProduct}
+                        >
+                          update
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
           </div>
-
-          {/* <button
-            id="updateProduct"
-            onClick={routeProduct}
-            className="bg-blue-100 p-1 m-1 rounded"
-          >
-            update product
-          </button> */}
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ function ProfileInformations({ user }) {
 
   const navigateUser = (e) => {
     navigate(loc.pathname + "/" + e.target.id);
-  }
+  };
   useEffect(() => {
     dispatch(getUsersAddress(user.email));
   }, [user, dispatch]);
@@ -20,46 +20,51 @@ function ProfileInformations({ user }) {
     <>
       {user && (
         <div className="w-96">
-          <div className="m-1 ">User Informations</div>
-          <div>
-            <div className=" flex items-center bg-slate-200 m-1 p-1">
-              <p className="text-lg font-bold">user name</p>
-              <p className="ml-1">{user.name} </p>
+          <div className="border-2 bg-neutral-100 rounded p-1 ">
+            <div className="m-1 flex justify-center">
+              <p className="bg-rose-100 rounded p-1">User Informations</p>
             </div>
+            <div>
+              <div className=" flex items-center rounded bg-slate-200 m-1 p-1">
+                <p className="text-lg font-bold">user name</p>
+                <p className="ml-1">{user.name} </p>
+              </div>
 
-            <div className=" flex  items-center bg-slate-200 m-1 p-1">
-              <p className="text-lg font-bold">user email:</p>
-              <p className="ml-1">{  user.email} </p>
-            </div>
-            <div className="flex justify-center">
-              <button
-                id="setUserInformations"
-                onClick={navigateUser}
-                className="bg-fuchsia-200 m-1 p-1 rounded "
-              >
-                update user
-              </button>
+              <div className=" flex  items-center rounded bg-slate-200 m-1 p-1">
+                <p className="text-lg font-bold">user email:</p>
+                <p className="ml-1">{user.email} </p>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  id="setUserInformations"
+                  onClick={navigateUser}
+                  className="bg-fuchsia-200 m-1 p-1 rounded "
+                >
+                  update user
+                </button>
+              </div>
             </div>
           </div>
-          <div>
-            <div className="m-1">
-              <p className="text-lg">Address</p>
+          <div className="border-2 bg-neutral-100 rounded p-1  mt-1">
+            <div className="flex justify-center">
+              <p className="bg-rose-100 rounded p-1">Address Settings</p>
             </div>
+
             {address.il === "" ? (
-              <div className="bg-slate-200 p-1 m-1 rounded">
+              <div className="bg-slate-200    rounded">
                 <p>adres eklenmemiş lütfen adres ekleyiniz </p>
               </div>
             ) : (
-              <div className="bg-slate-200 m-1 p-1">
-                <div className="flex items-center ">
-                  <p className="text-lg font-bold p-1">İl:</p>
+              <div className="">
+                <div className="bg-slate-200 flex m-1 rounded items-center ">
+                  <p className=" text-lg font-bold p-1">İl:</p>
                   <p>{address.il} </p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex bg-slate-200 m-1 rounded items-center">
                   <p className="text-lg font-bold p-1">İlçe: </p>
                   <p>{address.ilce} </p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex bg-slate-200 m-1 rounded items-center">
                   <p className="text-lg font-bold p-1 ">Full adress: </p>
                   <p>{address.fullAddress} </p>
                 </div>

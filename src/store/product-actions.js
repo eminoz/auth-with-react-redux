@@ -28,7 +28,7 @@ export const createNewProduct = ({ newProduct }) => {
     }
   };
 };
-export const updateProduct = ({ Product},productName ) => {
+export const updateProduct = ({ Product }, productName) => {
   return async (dispatch) => {
     const updateProduct = async ({ Product, productName }) => {
       const options = {
@@ -43,7 +43,7 @@ export const updateProduct = ({ Product},productName ) => {
 
         data: Product,
       };
-      console.log(Product)
+      console.log(Product);
       const response = await axios(options);
       return response;
     };
@@ -65,6 +65,31 @@ export const getAllProduct = () => {
     try {
       const response = await getProducts();
       dispatch(productActions.getProducts(response.Data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const deleteProduct = ({ productName }) => {
+  return async (dispatch) => {
+    const deleteProduct = async () => {
+      const options = {
+        url: `http://localhost:3000/product/delete/${productName} `,
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+          token: "",
+        },
+        mode: "cors",
+      };
+
+      const response = await axios(options);
+      return response.data;
+    };
+    try {
+      const response = await deleteProduct(productName);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

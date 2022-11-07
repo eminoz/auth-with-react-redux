@@ -38,10 +38,10 @@ function OrderCart({ orders, userId }) {
   return (
     <>
       <div className="flex  flex-col ">
-        <div className="flex  justify-center flex-col ">
+        <div className="flex bg-neutral-100	  justify-center flex-col ">
           {orders.map((o) => (
-            <div className="p-1 " key={o.productName}>
-              <div className=" w-90 min-w-full  bg-slate-50 p-1 h-24 min-h-full rounded">
+            <div className="p-1" key={o.productName}>
+              <div className=" w-90 min-w-full	  h-24 min-h-full rounded">
                 <div className="flex flex-col justify-between">
                   <div className="flex justify-center">
                     <div>resim</div>

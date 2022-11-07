@@ -8,13 +8,13 @@ function ProductList({ prods }) {
     const currentProd = prods.filter(
       (state) => state.productName === e.target.id
     );
-    const {...a}=currentProd
-    const products={
-      productName:a[0].productName,
-      description:a[0].description,
-      price:a[0].price,
-      quantity:1
-    }
+    const { ...a } = currentProd;
+    const products = {
+      productName: a[0].productName,
+      description: a[0].description,
+      price: a[0].price,
+      quantity: 1,
+    };
     dispatch(orderActions.addOrderToCart(products));
   };
   return (
@@ -35,9 +35,7 @@ function ProductList({ prods }) {
                   </div>
                 </div>
                 <div className="flex m-3  justify-between">
-                  <p
-                    className="text-2xl text-amber-600	 font-bold"
-                  >
+                  <p className="text-2xl text-amber-600	 font-bold">
                     {p.price}₺
                   </p>
                   <button

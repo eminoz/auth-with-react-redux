@@ -169,7 +169,7 @@ export const getUserByEmail = () => {
   return async (dispatch) => {
     const getUser = async (email) => {
       var userFromlocal = localStorage.getItem("token");
-
+      
       const localUserToken = JSON.parse(userFromlocal);
       const user = await axios.get(
         `http://localhost:3000/getUserByEmail/${email}`,

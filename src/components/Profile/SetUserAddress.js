@@ -4,7 +4,6 @@ import { updateOrders } from "../../store/user-actions";
 function SetUserAddress() {
   const address = useSelector((s) => s.todox.address);
   const email = useSelector((s) => s.todox.user.email);
-  console.log(address)
   const dispatch = useDispatch();
   const [il, setIl] = useState(address.il);
   const [ilce, setIlce] = useState(address.ilce);
