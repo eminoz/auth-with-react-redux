@@ -142,7 +142,6 @@ export const updateUserByEmail = ({ user }) => {
     };
     try {
       const r = await updateUser(user);
-      console.log(r);
       if (r.data.Success === false) {
         dispatch(
           alertActions.showNotification({
@@ -169,7 +168,7 @@ export const getUserByEmail = () => {
   return async (dispatch) => {
     const getUser = async (email) => {
       var userFromlocal = localStorage.getItem("token");
-      
+
       const localUserToken = JSON.parse(userFromlocal);
       const user = await axios.get(
         `http://localhost:3000/getUserByEmail/${email}`,

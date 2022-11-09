@@ -1,6 +1,6 @@
 import axios from "axios";
 import { productActions } from "./product-slice";
-
+import { alertActions } from "./alert-slice";
 export const createNewProduct = ({ newProduct }) => {
   return async (dispatch) => {
     const createProduct = async ({ newProduct }) => {
@@ -30,6 +30,16 @@ export const createNewProduct = ({ newProduct }) => {
 };
 export const updateProduct = ({ Product }, productName) => {
   return async (dispatch) => {
+    dispatch(alertActions.toggle());
+    setTimeout(() => {
+      dispatch(alertActions.toggle());
+    }, 4000);
+    dispatch(
+      alertActions.showNotification({
+        msg: "product updating",
+        alertType: "info",
+      })
+    );
     const updateProduct = async ({ Product, productName }) => {
       const options = {
         url: `http://localhost:3000/product/update/${productName} `,
@@ -43,13 +53,27 @@ export const updateProduct = ({ Product }, productName) => {
 
         data: Product,
       };
-      console.log(Product);
       const response = await axios(options);
       return response;
     };
     try {
       const response = await updateProduct({ Product, productName });
-      console.log(response);
+      if (response.data.Success === false) {
+        console.log(response.data)
+        dispatch(
+          alertActions.showNotification({
+            msg: response.data.Message,
+            alertType: "danger",
+          })
+        );
+        return
+      }
+      dispatch(
+        alertActions.showNotification({
+          msg: response.data.Message,
+          alertType: "info",
+        })
+      );
     } catch (error) {
       console.log(error);
     }

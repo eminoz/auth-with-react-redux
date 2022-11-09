@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "../index.css";
-import {  updateProduct } from "../store/product-actions";
+import { updateProduct } from "../store/product-actions";
+import Alerts from "../UI/Alerts";
+
 function UpdateProduct() {
   const { productId } = useParams();
   const prods = useSelector((s) => s.productx.products);
   const product = { ...prods.filter((e) => e.productName === productId) };
 
+  const alertIsVisible = useSelector((state) => state.alertx.alertIsVisible);
+  const notification = useSelector((state) => state.alertx.notification);
   const [productName, setProductName] = useState(product[0].productName);
   const [price, setPrice] = useState(product[0].price);
   const [description, setDecription] = useState(product[0].description);
@@ -22,8 +26,8 @@ function UpdateProduct() {
       Description: description,
       Quantity: Number(quantity),
     };
-    console.log(Product)
-    dispatch(updateProduct({ Product },productId));
+;
+    dispatch(updateProduct({ Product }, productId));
   };
 
   return (
@@ -67,7 +71,7 @@ function UpdateProduct() {
                 placeholder="description"
                 type="text"
                 name="description"
-                value={description }
+                value={description}
               />
             </div>
             <div className="flex items-center justify-between ">
@@ -83,6 +87,12 @@ function UpdateProduct() {
                 name="quantity"
               />
             </div>
+            {alertIsVisible && (
+              <Alerts
+                alertType={notification.alertType}
+                msg={notification.msg}
+              />
+            )}
             <button className="bg-violet-300 p-1 rounded m-1" onClick={update}>
               Update product
             </button>

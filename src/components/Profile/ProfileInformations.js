@@ -76,7 +76,7 @@ function ProfileInformations({ user }) {
                 onClick={navigateUser}
                 className="bg-fuchsia-200 m-1 p-1 rounded "
               >
-                add or update order
+                add or update address
               </button>
             </div>
           </div>

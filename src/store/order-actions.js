@@ -76,7 +76,8 @@ export const createOrders = ({ orders, userId }) => {
           })
         );
       }
-      console.log(product);
+
+
     } catch (error) {
       console.log(error);
     }

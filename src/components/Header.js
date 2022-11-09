@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Header() {
   const dispatch = useDispatch();
   let user = useSelector((state) => state.todox.user);
-  const totalPrice = useSelector((state) => state.orderx.totalPrice);
+  ;
   const logoutUser = () => {
     dispatch(userActions.logout());
   };
@@ -33,10 +33,7 @@ function Header() {
             </nav>
           </div>
 
-          <div className="bg-pink-200 p-2 rounded m-1">
-            total price {totalPrice}$
-          </div>
-
+        
           <div className="bg-fuchsia-200 rounded p-2 m-1">
             <nav>
               <Link to="/profile">Profile</Link>
