@@ -2,7 +2,12 @@ import axios from "axios";
 import { alertActions } from "./alert-slice";
 import { orderActions } from "./order-slice";
 import { userActions } from "./user-slice";
+const getToken = () => {
+  var userFromlocal = localStorage.getItem("token");
 
+  const localUserToken = JSON.parse(userFromlocal);
+  return localUserToken;
+};
 export const updateOrders = ({ email, address }) => {
   return async (dispatch) => {
     const updateAddress = async ({ email, address }) => {
@@ -110,10 +115,11 @@ export const updateUserByEmail = ({ user }) => {
       dispatch(alertActions.toggle());
     }, 4000);
 
-    var userFromlocal = localStorage.getItem("token");
+
     var emailFromlocal = localStorage.getItem("email");
     const localUserEmail = JSON.parse(emailFromlocal);
-    const localUserToken = JSON.parse(userFromlocal);
+;
+    const localUser= getToken()
     const updateUser = async (user) => {
       const options = {
         url: `http://localhost:3000/updateUser/${localUserEmail}`,
@@ -121,7 +127,7 @@ export const updateUserByEmail = ({ user }) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",
-          token: localUserToken,
+          token: localUser,
         },
         mode: "cors",
 
@@ -142,6 +148,7 @@ export const updateUserByEmail = ({ user }) => {
     };
     try {
       const r = await updateUser(user);
+      console.log(r);
       if (r.data.Success === false) {
         dispatch(
           alertActions.showNotification({
@@ -164,12 +171,12 @@ export const updateUserByEmail = ({ user }) => {
     }
   };
 };
+
 export const getUserByEmail = () => {
   return async (dispatch) => {
     const getUser = async (email) => {
-      var userFromlocal = localStorage.getItem("token");
+      const localUserToken = getToken();
 
-      const localUserToken = JSON.parse(userFromlocal);
       const user = await axios.get(
         `http://localhost:3000/getUserByEmail/${email}`,
         {
@@ -181,13 +188,15 @@ export const getUserByEmail = () => {
       return user.data;
     };
     const getOrders = async (id) => {
+
       const o = await axios.get(`http://localhost:3000/getUserOrders/${id}`);
       return o.data;
     };
 
     try {
       var emailFromlocal = localStorage.getItem("email");
-      const email = JSON.parse(emailFromlocal);
+      const email = JSON.parse(emailFromlocal)
+
       if (!email) {
         return;
       }
@@ -200,7 +209,7 @@ export const getUserByEmail = () => {
         return;
       }
       const responseUser = user.Data;
-
+;
       const orders = await getOrders(responseUser.id);
 
       if (orders.Data.Product === null) {

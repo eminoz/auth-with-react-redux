@@ -1,16 +1,23 @@
 import axios from "axios";
 import { productActions } from "./product-slice";
 import { alertActions } from "./alert-slice";
+const getToken = () => {
+  var userFromlocal = localStorage.getItem("token");
+
+  const localUserToken = JSON.parse(userFromlocal);
+  return localUserToken;
+};
 export const createNewProduct = ({ newProduct }) => {
   return async (dispatch) => {
     const createProduct = async ({ newProduct }) => {
+      const localToken=getToken()
       const options = {
         url: "http://localhost:3000/product/create",
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",
-          token: "",
+          token: localToken,
         },
         mode: "cors",
 
@@ -41,13 +48,14 @@ export const updateProduct = ({ Product }, productName) => {
       })
     );
     const updateProduct = async ({ Product, productName }) => {
+      const localToken=getToken()
       const options = {
         url: `http://localhost:3000/product/update/${productName} `,
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",
-          token: "",
+          token: localToken,
         },
         mode: "cors",
 
@@ -95,15 +103,17 @@ export const getAllProduct = () => {
   };
 };
 export const deleteProduct = ({ productName }) => {
+
   return async (dispatch) => {
     const deleteProduct = async () => {
+      const localUser=getToken()
       const options = {
         url: `http://localhost:3000/product/delete/${productName} `,
         method: "DELETE",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json;charset=UTF-8",
-          token: "",
+          token: localUser,
         },
         mode: "cors",
       };

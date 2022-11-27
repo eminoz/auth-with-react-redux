@@ -9,13 +9,10 @@ function App() {
   let isAuh = useSelector((state) => state.todox.isAuth);
 
   const dispatch = useDispatch();
-
-  
   useEffect(() => {
     dispatch(userActions.fetchUserFromLocal());
   }, [isAuh, dispatch]);
 
-  
   return (
     <>
       <div className="flex  flex-col">{!isAuh ? <UserAuth /> : <Main />}</div>

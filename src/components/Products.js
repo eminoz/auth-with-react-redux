@@ -7,13 +7,12 @@ function Products() {
   const dispatch = useDispatch();
   const prods = useSelector((s) => s.productx.products);
 
-
   useEffect(() => {
     dispatch(getAllProduct());
   }, [dispatch]);
   return (
     <>
-      <div className="flex  justify-center">
+      <div className="flex   justify-center">
         <ProductList prods={prods} />
       </div>
     </>
