@@ -30,7 +30,7 @@ function UserAuth() {
         <div className="w-6/12 m-2  rounded flex justify-center bg-red-50">
           <form
             onSubmit={afterSubmission}
-            className="m-2  flex flex-col h-100 justify-around   m-5"
+            className="m-2  flex flex-col h-100 justify-around"
           >
             {isSingedUp && (
               <input
@@ -67,7 +67,7 @@ function UserAuth() {
               {isSingedUp ? <p>sign up</p> : <p>sign in </p>}
             </button>
 
-            <div className="flex flex justify-center w-60 min-w-full flex-row ">
+            <div className="flex justify-center w-60 min-w-full flex-row ">
               {isSingedUp ? (
                 <p className=" bg-red-300 rounded p-1">got an account </p>
               ) : (

@@ -9,6 +9,7 @@ const getToken = () => {
   return localUserToken;
 };
 export const updateOrders = ({ email, address }) => {
+
   return async (dispatch) => {
     const updateAddress = async ({ email, address }) => {
       const options = {
@@ -122,6 +123,7 @@ export const updateUserByEmail = ({ user }) => {
     const localUser= getToken()
     const updateUser = async (user) => {
       const options = {
+        
         url: `http://localhost:3000/updateUser/${localUserEmail}`,
         method: "PUT",
         headers: {
@@ -148,7 +150,7 @@ export const updateUserByEmail = ({ user }) => {
     };
     try {
       const r = await updateUser(user);
-      console.log(r);
+
       if (r.data.Success === false) {
         dispatch(
           alertActions.showNotification({
